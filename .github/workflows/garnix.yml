@@ -1,0 +1,12 @@
+on: push
+ 
+permissions:
+  contents: read
+ 
+jobs:
+  test-garnix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jkarni/action-test@v0.8
+        with:
+          url: http://garnix.io/project/
