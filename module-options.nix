@@ -95,6 +95,8 @@ in
     configFile = configFormat.generate "treefmt.toml" config.settings;
 
     wrapper = nixpkgs.writeShellScriptBin "treefmt" ''
+      set -euo pipefail
+
       find_up() (
         ancestors=()
         while [[ ! -f "$1" ]]; do
@@ -107,6 +109,7 @@ in
         done
       )
       tree_root=$(find_up "${config.projectRootFile}")
+      export PATH=${nixpkgs.dash}/bin
       exec ${config.package}/bin/treefmt --config-file ${config.build.configFile} "$@" --tree-root "$tree_root"
     '';
   };
