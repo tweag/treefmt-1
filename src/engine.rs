@@ -123,7 +123,7 @@ pub fn run_treefmt(
                 let start_time = Instant::now();
 
                 // Run the formatter
-                paths.par_chunks(1024).try_for_each(|path_chunks| {
+                paths.par_chunks(1).try_for_each(|path_chunks| {
                     formatter.clone().fmt(path_chunks)
                 })?;
 
